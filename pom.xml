@@ -19,6 +19,8 @@
         <module>cloud-consumerzk-order8081</module>
         <module>cloud-provider-consul-payment8006</module>
         <module>cloud-consumer-consul-order8081</module>
+        <module>cloud-sonsumer-openfeign-8081</module>
+        <module>cloud-provider-hystrix-payment8001</module>
     </modules>
 
     <!-- 统一管理jar包版本 -->
