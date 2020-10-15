@@ -5,6 +5,55 @@ spring:
   application:
     name: cloud-order-service
 
+feign:
+  #替换掉JDK默认HttpURLConnection实现的 Http Client
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        #连接超时时间
+        connectTimeout: 5000
+        #读取超时时间
+        readTimeout: 5000
+
+hystrix:
+  propagate:
+    request-attribute:
+      enabled: true
+  command:
+    #全局默认配置
+    default:
+      #线程隔离相关
+      execution:
+        timeout:
+          #是否给方法执行设置超时时间，默认为true。一般我们不要改。
+          enabled: true
+        isolation:
+          #配置请求隔离的方式，这里是默认的线程池方式。还有一种信号量的方式semaphore，使用比较少。
+          strategy: threadPool
+          thread:
+            #方式执行的超时时间，默认为1000毫秒，在实际场景中需要根据情况设置
+            timeoutInMilliseconds: 5000
+            #发生超时时是否中断方法的执行，默认值为true。不要改。
+            interruptOnTimeout: true
+            #是否在方法执行被取消时中断方法，默认值为false。没有实际意义，默认就好！
+            interruptOnCancel: false
+
+#设置feign客户端超时时间(OpenFeign默认支持ribbon)
+ribbon:
+  #指的是建立连接后从服务器读取到可用资源所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接所用的时间，适用于网络状况正常的情况下,两端连接所用的时间
+  ConnectTimeout: 5000
+
+logging:
+  level:
+    # feign日志以什么级别监控哪个接口
+    com.river.springcloud.service.PaymentFeignService: debug
+
 eureka:
   client:
     #表示是否将自己注册进EurekaServer默认为true。

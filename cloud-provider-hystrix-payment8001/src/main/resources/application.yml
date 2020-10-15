@@ -4,18 +4,7 @@ server:
 spring:
   application:
     name: cloud-hystrix-payment-service
-  datasource:
-    type: com.alibaba.druid.pool.DruidDataSource            # 当前数据源操作类型
-    driver-class-name: org.gjt.mm.mysql.Driver              # mysql驱动包
-    url: jdbc:mysql://192.168.190.25:3306/springcloud2020?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    username: root
-    password: Naive+1s
-    testWhileIdle: false #指明连接是否被空闲连接回收器(如果有)进行检验.如果检测失败,则连接将被从池中去除.
-    #validationQuery: "SELECT 1"  #验证连接是否可用，使用的SQL语句
 
-mybatis:
-  mapperLocations: classpath:mapper/*.xml
-  type-aliases-package: com.river.springcloud.entities
 
 eureka:
   client:
