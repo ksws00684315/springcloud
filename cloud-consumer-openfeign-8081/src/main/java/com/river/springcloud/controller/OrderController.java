@@ -1,5 +1,6 @@
 package com.river.springcloud.controller;
 
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.river.springcloud.entities.CommonResult;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@DefaultProperties(defaultFallback = "payment_Global_FallbackMethod")
 public class OrderController {
 
     @Autowired
@@ -21,9 +23,11 @@ public class OrderController {
         return paymentFeignService.getPayment(id);
     }*/
 
+    //@HystrixCommand
     @GetMapping("/consumer/payment/hystrix/ok/{id}")
     public String paymentInfo_OK(@PathVariable("id") Integer id)
     {
+        //int a = 10/0;
         String result = paymentFeignService.paymentInfo_OK(id);
         return result;
     }
