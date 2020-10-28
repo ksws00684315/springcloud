@@ -2,6 +2,8 @@ package com.river.springcloud.service.impl;
 
 import com.river.springcloud.service.IMessageProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
@@ -9,6 +11,7 @@ import org.springframework.messaging.MessageChannel;
 import javax.annotation.Resource;
 import java.util.UUID;
 
+@EnableBinding(Source.class) //定义消息的推送管道
 public class MessageProviderImpl implements IMessageProvider {
     @Autowired
     private MessageChannel output; // 消息发送管道
